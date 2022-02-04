@@ -10,7 +10,7 @@ import {
 const Main: FC = () => {
   const [user, setUser] = useRecoilState(userEmailSelector)
   const [csrfToken, setCsrfToken] = useRecoilState(csrfTokenSelector)
-  const [isLogin, setIslogin] = useRecoilState(isLoginSelector)
+  const [isLogin, setIsLogin] = useRecoilState(isLoginSelector)
 
   useEffect(() => {
     ;(async () => {
@@ -23,7 +23,29 @@ const Main: FC = () => {
   }, [])
 
   if (isLogin) {
-    return <div>logined</div>
+    return (
+      <div>
+        logined
+        <button
+          onClick={() => {
+            fetch('https://localhost.hironomiu.com/api/v1/auth/signout', {
+              method: 'POST',
+              mode: 'cors',
+              cache: 'no-cache',
+              redirect: 'follow',
+              headers: {
+                'Content-Type': 'application/json',
+                'CSRF-Token': csrfToken,
+              },
+            })
+            // TODO ログアウトの判定
+            setIsLogin(false)
+          }}
+        >
+          Logout
+        </button>
+      </div>
+    )
   }
 
   return (
@@ -59,7 +81,7 @@ const Main: FC = () => {
             }
           )
           // TODO ログインの判定
-          setIslogin(true)
+          setIsLogin(true)
           console.log(res)
         }}
       >
