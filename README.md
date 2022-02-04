@@ -1,5 +1,7 @@
 # typescript-react-recoil-api-client
 
+[typescript-express-api-server](https://github.com/hironomiu/typescript-express-api-server)のクライアント
+
 ```
 npx create-react-app . --template typescript
 ```
