@@ -7,7 +7,7 @@ export const userAtom = atom({
   default: { email: 'taro@example.com', password: 'password' },
 })
 
-export const userEmailSelector = selector<{ email: string; password: string }>({
+export const userSelector = selector<{ email: string; password: string }>({
   key: 'userSelector',
   get: ({ get }) => {
     const user = get(userAtom)

@@ -1,5 +1,7 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 import Main from './components/Main'
+import Layout from './components/Layout'
+import SignIn from './components/SignIn'
 import { Suspense } from 'react'
 import { RecoilRoot } from 'recoil'
 
@@ -13,7 +15,10 @@ const App = () => {
       <RecoilRoot>
         <Suspense fallback={<Fallback />}>
           <Routes>
-            <Route path="/" element={<Main />}></Route>
+            <Route path="/" element={<Layout />}>
+              <Route path="/" element={<Main />}></Route>
+              <Route path="/signin" element={<SignIn />}></Route>
+            </Route>
           </Routes>
         </Suspense>
       </RecoilRoot>
