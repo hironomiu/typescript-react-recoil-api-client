@@ -1,44 +1,34 @@
 import { FC, useEffect, useState } from 'react'
 import { useRecoilState, useRecoilValue } from 'recoil'
-import { userEmailSelector, csrfTokenSelector, isLoginSelector } from '../App'
+import {
+  userEmailSelector,
+  csrfTokenSelector,
+  isLoginSelector,
+} from '../recoil/global'
+
+import { testAtom } from '../recoil/main'
+import { useMain } from '../hooks/useMain'
 
 const API_URL = process.env.REACT_APP_API_URL
 const Main: FC = () => {
+  const test = useRecoilValue(testAtom)
   const [user, setUser] = useRecoilState(userEmailSelector)
-  // const [csrfToken, setCsrfToken] = useRecoilState(csrfTokenSelector)
   const csrfToken = useRecoilValue(csrfTokenSelector)
-  const [isLogin, setIsLogin] = useRecoilState<boolean>(isLoginSelector)
-  // const [csrfToken, setCsrfToken] = useState('')
-  // useEffect(() => {
-  //   ;(async () => {
-  //     const res = await fetch(API_URL + '/api/v1/csrf-token', {
-  //       method: 'GET',
-  //       credentials: 'include',
-  //     })
-  //     const data = await res.json()
-  //     console.log('csrfToken2:', data.csrfToken)
-  //     setCsrfToken(data.csrfToken)
-  //   })()
-  // }, [])
+  const { fetchIsLogin } = useMain()
 
+  const [isLogin, setIsLogin] = useRecoilState<boolean>(isLoginSelector)
   useEffect(() => {
     ;(async () => {
-      const res = await fetch(API_URL + '/api/v1/auth/signin', {
-        method: 'GET',
-        credentials: 'include',
-      })
-      const data = await res.json()
+      const data = await fetchIsLogin()
       if (data.isSuccess) setIsLogin(true)
-      console.log('data:', data)
+      console.log(data)
     })()
   }, [])
-
-  console.log('hoge', isLogin)
 
   if (isLogin) {
     return (
       <div>
-        logined
+        logined:{test}
         <button
           onClick={async (e) => {
             e.preventDefault()
@@ -55,9 +45,9 @@ const Main: FC = () => {
             })
             const data = await res.json()
             // if (data.isSuccess) setIsLogin(false)
-            // setTimeout(() => setIsLogin(false), 0)
             setIsLogin(false)
-            console.log(isLogin)
+            console.log(data)
+            console.log('isLogin:', isLogin)
           }}
         >
           Logout
@@ -96,6 +86,7 @@ const Main: FC = () => {
             },
             body: JSON.stringify({ ...user }),
           })
+          console.log(res.status)
           if (res.status === 200) setIsLogin(true)
         }}
       >
