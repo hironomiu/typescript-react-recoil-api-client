@@ -1,17 +1,20 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Main from './components/Main'
 import { Suspense } from 'react'
 import { RecoilRoot } from 'recoil'
-import Main from './components/Main'
-
-const Fallback = () => {
-  return <div>Loading...</div>
-}
 
 const App = () => {
+  const Fallback = () => {
+    return <div>Loading...</div>
+  }
+
   return (
     <div>
       <RecoilRoot>
         <Suspense fallback={<Fallback />}>
-          <Main />
+          <Routes>
+            <Route path="/" element={<Main />}></Route>
+          </Routes>
         </Suspense>
       </RecoilRoot>
     </div>

@@ -41,3 +41,19 @@ Recoil
 ```
 npm install recoil
 ```
+
+React Router DOM
+
+```
+npm install react-router-dom
+```
+
+```
+npm install --save-dev @types/react-router-dom
+```
+
+エラーが出る場合
+
+```
+npm install --save-dev @babel/core@7.16.12
+```

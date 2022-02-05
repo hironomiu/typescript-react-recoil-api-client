@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react'
+import { FC, useEffect } from 'react'
 import { useRecoilState, useRecoilValue } from 'recoil'
 import {
   userEmailSelector,
@@ -9,7 +9,6 @@ import {
 import { testAtom } from '../recoil/main'
 import { useMain } from '../hooks/useMain'
 
-const API_URL = process.env.REACT_APP_API_URL
 const Main: FC = () => {
   const test = useRecoilValue(testAtom)
   const [user, setUser] = useRecoilState(userEmailSelector)
@@ -22,9 +21,8 @@ const Main: FC = () => {
     ;(async () => {
       const data = await fetchIsLogin()
       if (data.isSuccess) setIsLogin(true)
-      console.log(data)
     })()
-  }, [])
+  }, [fetchIsLogin, setIsLogin])
 
   if (isLogin) {
     return (
