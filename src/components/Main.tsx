@@ -37,19 +37,23 @@ const Main: FC = () => {
       <div>
         logined
         <button
-          onClick={() => {
-            fetch('https://localhost.hironomiu.com/api/v1/auth/signout', {
-              method: 'POST',
-              mode: 'cors',
-              cache: 'no-cache',
-              redirect: 'follow',
-              headers: {
-                'Content-Type': 'application/json',
-                'CSRF-Token': csrfToken,
-              },
-            })
-            // TODO ログアウトの判定
-            setIsLogin(false)
+          onClick={async (e) => {
+            e.preventDefault()
+            const res = await fetch(
+              'https://localhost.hironomiu.com/api/v1/auth/signout',
+              {
+                method: 'POST',
+                mode: 'cors',
+                cache: 'no-cache',
+                redirect: 'follow',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'CSRF-Token': csrfToken,
+                },
+              }
+            )
+            const data = await res.json()
+            if (data.isSuccess) setIsLogin(false)
           }}
         >
           Logout
