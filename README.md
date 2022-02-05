@@ -52,7 +52,7 @@ npm install react-router-dom
 npm install --save-dev @types/react-router-dom
 ```
 
-エラーが出る場合
+エラーが出る場合(@babel/core をダウングレードする)
 
 ```
 npm install --save-dev @babel/core@7.16.12
