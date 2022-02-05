@@ -22,6 +22,16 @@ const Main: FC = () => {
     })()
   }, [])
 
+  useEffect(() => {
+    ;(async () => {
+      const res = await fetch(
+        'https://localhost.hironomiu.com/api/v1/auth/signin'
+      )
+      const data = await res.json()
+      if (data.isSuccess) setIsLogin(true)
+      console.log(data)
+    })()
+  }, [])
   if (isLogin) {
     return (
       <div>
