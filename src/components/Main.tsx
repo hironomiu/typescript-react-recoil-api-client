@@ -14,9 +14,10 @@ const Main: FC = () => {
   const test = useRecoilValue(testAtom)
   const [user, setUser] = useRecoilState(userEmailSelector)
   const csrfToken = useRecoilValue(csrfTokenSelector)
-  const { fetchIsLogin } = useMain()
-
   const [isLogin, setIsLogin] = useRecoilState<boolean>(isLoginSelector)
+
+  const { fetchIsLogin, fetchGetSignOut, fetchPostSignIn } = useMain()
+
   useEffect(() => {
     ;(async () => {
       const data = await fetchIsLogin()
@@ -32,22 +33,8 @@ const Main: FC = () => {
         <button
           onClick={async (e) => {
             e.preventDefault()
-            const res = await fetch(API_URL + '/api/v1/auth/signout', {
-              method: 'POST',
-              mode: 'cors',
-              cache: 'no-cache',
-              redirect: 'follow',
-              credentials: 'include',
-              headers: {
-                'Content-Type': 'application/json',
-                'CSRF-Token': csrfToken,
-              },
-            })
-            const data = await res.json()
-            // if (data.isSuccess) setIsLogin(false)
-            setIsLogin(false)
-            console.log(data)
-            console.log('isLogin:', isLogin)
+            const data = await fetchGetSignOut(csrfToken)
+            if (data.isSuccess) setIsLogin(false)
           }}
         >
           Logout
@@ -73,20 +60,8 @@ const Main: FC = () => {
       <button
         onClick={async (e) => {
           e.preventDefault()
-          console.log(csrfToken)
-          const res = await fetch(API_URL + '/api/v1/auth/signin', {
-            method: 'POST',
-            mode: 'cors',
-            cache: 'no-cache',
-            credentials: 'include',
-            redirect: 'follow',
-            headers: {
-              'Content-Type': 'application/json',
-              'CSRF-Token': csrfToken,
-            },
-            body: JSON.stringify({ ...user }),
-          })
-          console.log(res.status)
+          // TODO 型
+          const res: any = await fetchPostSignIn(csrfToken, user)
           if (res.status === 200) setIsLogin(true)
         }}
       >
