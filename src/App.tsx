@@ -25,14 +25,21 @@ export const csrfTokenAtom = atom({
 
 export const csrfTokenSelector = selector<string>({
   key: 'csrfTokenSelector',
-  get: ({ get }) => {
+  get: async ({ get }) => {
     const csrfToken = get(csrfTokenAtom)
+    if (csrfToken === '') {
+      const res = await fetch(
+        'https://localhost.hironomiu.com/api/v1/csrf-token'
+      )
+      const data = await res.json()
+      return data.csrfToken
+    }
     return csrfToken
   },
-  set: ({ set }, newValue) => {
-    console.log(newValue)
-    set(csrfTokenAtom, newValue)
-  },
+  // set: ({ set }, newValue) => {
+  //   console.log(newValue)
+  //   set(csrfTokenAtom, newValue)
+  // },
 })
 
 export const isLoginAtom = atom({

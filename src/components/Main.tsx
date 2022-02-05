@@ -1,5 +1,5 @@
 import { FC, useEffect } from 'react'
-import { useRecoilState } from 'recoil'
+import { useRecoilState, useRecoilValue } from 'recoil'
 import {
   userAtom,
   userEmailSelector,
@@ -9,18 +9,9 @@ import {
 
 const Main: FC = () => {
   const [user, setUser] = useRecoilState(userEmailSelector)
-  const [csrfToken, setCsrfToken] = useRecoilState(csrfTokenSelector)
+  // const [csrfToken, setCsrfToken] = useRecoilState(csrfTokenSelector)
+  const csrfToken = useRecoilValue(csrfTokenSelector)
   const [isLogin, setIsLogin] = useRecoilState(isLoginSelector)
-
-  useEffect(() => {
-    ;(async () => {
-      const res = await fetch(
-        'https://localhost.hironomiu.com/api/v1/csrf-token'
-      )
-      const data = await res.json()
-      setCsrfToken(data.csrfToken)
-    })()
-  }, [])
 
   useEffect(() => {
     ;(async () => {
