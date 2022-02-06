@@ -12,6 +12,10 @@ npm install
 
 プロジェクト直下に`.env.production.local`(本番用),`.env.development.local`(開発用)を作成し設定
 
+| 変数名            | 設定値           |
+| :---------------- | :--------------- |
+| REACT_APP_API_URL | API サーバの URL |
+
 ```
 REACT_APP_API_URL=
 ```
