@@ -1,7 +1,17 @@
-import React from 'react'
+import { memo } from 'react'
+import { SetterOrUpdater } from 'recoil'
 
-// TODO 型
-const InputPassword = (props: any) => {
+type PROPS = {
+  user: {
+    email: string
+    password: string
+  }
+  setUser: SetterOrUpdater<{
+    email: string
+    password: string
+  }>
+}
+const InputPassword = memo((props: PROPS) => {
   return (
     <input
       type="password"
@@ -12,6 +22,6 @@ const InputPassword = (props: any) => {
       }
     />
   )
-}
+})
 
 export default InputPassword
