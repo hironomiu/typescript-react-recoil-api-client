@@ -1,22 +1,22 @@
 import { FC, useEffect } from 'react'
-import Header from './Header'
 import { Outlet, useNavigate } from 'react-router-dom'
-import Footer from './Footer'
 import { useLayout } from '../hooks/useLayout'
 import { useRecoilState } from 'recoil'
 import { isLoginSelector } from '../recoil/global'
+import Header from './Header'
+import Footer from './Footer'
 
 const Layout: FC = () => {
-  const { fetchIsLogin } = useLayout()
+  const { fetchGetIsLogin } = useLayout()
   const [isLogin, setIsLogin] = useRecoilState(isLoginSelector)
   const navigate = useNavigate()
 
   useEffect(() => {
     ;(async () => {
-      const data = await fetchIsLogin()
+      const data = await fetchGetIsLogin()
       if (data.isSuccess) setIsLogin(true)
     })()
-  }, [fetchIsLogin, setIsLogin])
+  }, [fetchGetIsLogin, setIsLogin])
 
   useEffect(() => {
     if (!isLogin) navigate('/signin')
