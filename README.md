@@ -34,25 +34,22 @@ npm run build
 
 ## Install Memo
 
-React + TypeScript
+### React + TypeScript
 
 ```
 npx create-react-app . --template typescript
 ```
 
-Recoil
+### Recoil
 
 ```
 npm install recoil
 ```
 
-React Router DOM
+### React Router DOM
 
 ```
 npm install react-router-dom
-```
-
-```
 npm install --save-dev @types/react-router-dom
 ```
 
