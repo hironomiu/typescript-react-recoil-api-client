@@ -7,6 +7,8 @@ import {
   csrfTokenSelector,
 } from '../recoil/global'
 import { useSignIn } from '../hooks/useSignIn'
+import InputEmail from './InputEmail'
+import InputPassword from './InputPassword'
 
 const SignIn = () => {
   const navigate = useNavigate()
@@ -19,27 +21,21 @@ const SignIn = () => {
     if (isLogin) navigate('/')
   }, [isLogin, navigate])
 
-  console.log('signin csrfToken:', csrfToken)
+  const handleClick = async (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    e.preventDefault()
+    const res = await fetchPostSignIn(csrfToken, user)
+    if (res.status === 200) setIsLogin(true)
+  }
+
   return (
     <div>
-      <input
-        type="email"
-        value={user.email}
-        placeholder="email"
-        onChange={(e) => setUser({ ...user, email: e.target.value })}
-      />
-      <input
-        type="password"
-        value={user.password}
-        placeholder="password"
-        onChange={(e) => setUser({ ...user, password: e.target.value })}
-      />
+      <InputEmail user={user} setUser={setUser} />
+      <InputPassword user={user} setUser={setUser} />
       <button
-        onClick={async (e) => {
-          e.preventDefault()
-          // TODO 型
-          const res: any = await fetchPostSignIn(csrfToken, user)
-          if (res.status === 200) setIsLogin(true)
+        onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+          handleClick(e)
         }}
       >
         ログイン

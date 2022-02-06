@@ -54,8 +54,6 @@ export const isLoginSelector = selector<boolean>({
     return isLogin
   },
   set: ({ set, get }, newValue) => {
-    console.log('get:', get(isLoginAtom))
-    console.log('newValue:', newValue)
     set(isLoginAtom, newValue)
   },
   cachePolicy_UNSTABLE: {
