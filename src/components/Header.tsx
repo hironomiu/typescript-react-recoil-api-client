@@ -32,7 +32,7 @@ const Header: FC = memo(() => {
                 onClick={() => navigate('/notification')}
               />
               {notificationCount === 0 ? null : (
-                <span className=" absolute inline-block text-[5px] top-[10px] right-[83px] bg-red-500 text-white rounded-full text-center h-[12px] w-[12px] leading-[12px]">
+                <span className="absolute inline-block text-[5px] top-[10px] right-[83px] bg-red-500 text-white rounded-full text-center h-[12px] w-[12px] leading-[12px]">
                   {notificationCount}
                 </span>
               )}
