@@ -5,7 +5,11 @@ import { testAtom } from '../recoil/main'
 const Main: FC = () => {
   const test = useRecoilValue(testAtom)
 
-  return <div className="h-[90vh]">logined:{test}</div>
+  return (
+    <main className="flex flex-col justify-center h-[90vh]">
+      logined:{test}
+    </main>
+  )
 }
 
 export default Main

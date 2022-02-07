@@ -19,6 +19,7 @@ const InputEmail = memo((props: PROPS) => {
       value={props.user.email}
       placeholder="email"
       onChange={(e) => props.setUser({ ...props.user, email: e.target.value })}
+      className="bg-gray-200 rounded px-3 py-1 my-1"
     />
   )
 })

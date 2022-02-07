@@ -8,12 +8,12 @@ const Header: FC = () => {
   const { fetchGetSignOut } = useHeader()
 
   return (
-    <header className="flex flex-row item-center">
+    <header className="flex flex-row item-center border-b-[1px] border-gray-300">
       <div className="flex justify-between w-screen text-xl">
-        <div className=" mx-3">
+        <div className=" m-3">
           <span>Header</span>
         </div>
-        <div className="mx-3">
+        <div className="m-3">
           {isLogin ? (
             <span
               onClick={async (e) => {

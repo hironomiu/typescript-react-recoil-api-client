@@ -20,6 +20,7 @@ const InputPassword = memo((props: PROPS) => {
       onChange={(e) =>
         props.setUser({ ...props.user, password: e.target.value })
       }
+      className="bg-gray-200 rounded px-3 py-1 my-1"
     />
   )
 })

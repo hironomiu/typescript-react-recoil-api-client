@@ -19,7 +19,7 @@ const Layout: FC = () => {
   }, [fetchGetIsLogin, setIsLogin])
 
   useEffect(() => {
-    if (!isLogin) navigate('/signin')
+    if (!isLogin) navigate('/auth')
   }, [isLogin, navigate])
 
   return (

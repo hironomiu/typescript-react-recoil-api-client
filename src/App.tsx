@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom'
 import Main from './components/Main'
 import Layout from './components/Layout'
-import SignIn from './components/SignIn'
+import Auth from './components/Auth'
 import { Suspense } from 'react'
 import { RecoilRoot } from 'recoil'
 
@@ -17,7 +17,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Layout />}>
               <Route path="/" element={<Main />}></Route>
-              <Route path="/signin" element={<SignIn />}></Route>
+              <Route path="/auth" element={<Auth />}></Route>
             </Route>
           </Routes>
         </Suspense>
