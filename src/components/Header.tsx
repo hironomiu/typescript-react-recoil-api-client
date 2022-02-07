@@ -16,6 +16,7 @@ const Header: FC = () => {
         <div className="m-3">
           {isLogin ? (
             <span
+              className="hover:cursor-pointer"
               onClick={async (e) => {
                 e.preventDefault()
                 const data = await fetchGetSignOut(csrfToken)

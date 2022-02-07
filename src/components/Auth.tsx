@@ -49,7 +49,7 @@ const Auth = () => {
             SignIn
           </button>
           <span
-            className="border-b-[1px] border-black mt-2"
+            className="border-b-[1px] border-black mt-2 hover:cursor-pointer"
             onClick={() => setIsSignIn(false)}
           >
             SignUp?
@@ -65,7 +65,7 @@ const Auth = () => {
             SignUp
           </button>
           <span
-            className="border-b-[1px] border-black mt-2"
+            className="border-b-[1px] border-black mt-2 hover:cursor-pointer"
             onClick={() => setIsSignIn(true)}
           >
             SignIn?
