@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, memo } from 'react'
 import { useRecoilState, useRecoilValue } from 'recoil'
 import {
   isLoginSelector,
@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom'
 import { useHeader } from '../hooks/useHeader'
 import { BellIcon } from '@heroicons/react/outline'
 
-const Header: FC = () => {
+const Header: FC = memo(() => {
   const [isLogin, setIsLogin] = useRecoilState(isLoginSelector)
   const notificationCount = useRecoilValue(notificationCountAtom)
   const csrfToken = useRecoilValue(csrfTokenSelector)
@@ -32,22 +32,7 @@ const Header: FC = () => {
                 onClick={() => navigate('/notification')}
               />
               {notificationCount === 0 ? null : (
-                <span
-                  style={{
-                    position: 'absolute',
-                    display: 'inline-block',
-                    top: '10px',
-                    right: '83px',
-                    fontSize: '5px',
-                    color: '#fff',
-                    background: '#ec4646',
-                    borderRadius: '50%',
-                    width: '12px',
-                    height: '12px',
-                    lineHeight: '12px',
-                    textAlign: 'center',
-                  }}
-                >
+                <span className=" absolute inline-block text-[5px] top-[10px] right-[83px] bg-red-500 text-white rounded-full text-center h-[12px] w-[12px] leading-[12px]">
                   {notificationCount}
                 </span>
               )}
@@ -67,6 +52,6 @@ const Header: FC = () => {
       </div>
     </header>
   )
-}
+})
 
 export default Header
