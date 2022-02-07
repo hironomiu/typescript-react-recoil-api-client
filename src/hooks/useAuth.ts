@@ -7,7 +7,7 @@ type User = {
   password: string
 }
 
-export const useSignIn = () => {
+export const useAuth = () => {
   const fetchPostSignIn = useCallback(async (csrfToken: string, user: User) => {
     const res = await fetch(API_URL.toString(), {
       method: 'POST',
@@ -21,7 +21,8 @@ export const useSignIn = () => {
       },
       body: JSON.stringify({ ...user }),
     })
-    return res
+    const data = await res.json()
+    return data
   }, [])
   return { fetchPostSignIn }
 }

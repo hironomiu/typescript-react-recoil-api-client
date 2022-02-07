@@ -6,19 +6,21 @@ import {
   userSelector,
   csrfTokenSelector,
 } from '../recoil/global'
-import { useSignIn } from '../hooks/useSignIn'
-import InputEmail from './InputEmail'
-import InputPassword from './InputPassword'
+import { useAuth } from '../hooks/useAuth'
+import InputEmail from './parts/InputEmail'
+import InputPassword from './parts/InputPassword'
+import ErrorMessageModal from './modal/ErrorMessageModal'
 
 const Auth = () => {
   const navigate = useNavigate()
   const csrfToken = useRecoilValue(csrfTokenSelector)
   const [isLogin, setIsLogin] = useRecoilState(isLoginSelector)
   const [user, setUser] = useRecoilState(userSelector)
-  const { fetchPostSignIn } = useSignIn()
+  const { fetchPostSignIn } = useAuth()
 
   // useStateだがRoutingする時はRecoilで管理させる
   const [isSignIn, setIsSignIn] = useState(true)
+  const [modalOn, setModalOn] = useState<boolean>(false)
 
   useEffect(() => {
     if (isLogin) navigate('/')
@@ -29,13 +31,21 @@ const Auth = () => {
   ) => {
     e.preventDefault()
     const res = await fetchPostSignIn(csrfToken, user)
-    if (res.status === 200) setIsLogin(true)
+    console.log(res)
+    if (res.isSuccess === true) {
+      setIsLogin(true)
+    } else {
+      setModalOn(true)
+    }
   }
 
   return (
     <main className="flex flex-col h-[86vh] items-center justify-center">
       {isSignIn ? (
         <>
+          {modalOn ? (
+            <ErrorMessageModal message="SignIn Error" setModalOn={setModalOn} />
+          ) : null}
           <h1 className="text-2xl">SignIn</h1>
           <InputEmail user={user} setUser={setUser} />
           <InputPassword user={user} setUser={setUser} />

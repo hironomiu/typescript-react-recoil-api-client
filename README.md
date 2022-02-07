@@ -79,3 +79,19 @@ module.exports = {
   plugins: [],
 }
 ```
+
+### @headlessui/react
+
+モーダル用
+
+```
+npm install @headlessui/react
+```
+
+### @heroicons/react
+
+アイコン用
+
+```
+npm install @heroicons/react
+```
