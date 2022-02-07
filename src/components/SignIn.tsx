@@ -30,7 +30,7 @@ const SignIn = () => {
   }
 
   return (
-    <div>
+    <div className="h-[90vh]">
       <InputEmail user={user} setUser={setUser} />
       <InputPassword user={user} setUser={setUser} />
       <button

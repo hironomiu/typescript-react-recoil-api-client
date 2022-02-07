@@ -2,7 +2,7 @@ import { useCallback } from 'react'
 const FETCH_GET_SIGNOUT_PATH = '/api/v1/auth/signout'
 const API_URL = new URL(FETCH_GET_SIGNOUT_PATH, process.env.REACT_APP_API_URL)
 
-export const useMain = () => {
+export const useHeader = () => {
   const fetchGetSignOut = useCallback(async (csrfToken: string) => {
     const res = await fetch(API_URL.toString(), {
       method: 'POST',
