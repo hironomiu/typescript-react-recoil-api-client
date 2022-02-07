@@ -6,7 +6,7 @@ const Main: FC = () => {
   const test = useRecoilValue(testAtom)
 
   return (
-    <main className="flex flex-col justify-center h-[90vh]">
+    <main className="flex flex-col justify-center h-[86vh]">
       logined:{test}
     </main>
   )

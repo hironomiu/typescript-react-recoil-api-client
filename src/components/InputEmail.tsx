@@ -14,13 +14,18 @@ type PROPS = {
 
 const InputEmail = memo((props: PROPS) => {
   return (
-    <input
-      type="email"
-      value={props.user.email}
-      placeholder="email"
-      onChange={(e) => props.setUser({ ...props.user, email: e.target.value })}
-      className="bg-gray-200 rounded px-3 py-1 my-1"
-    />
+    <div className="flex flex-col">
+      <label htmlFor="">Email</label>
+      <input
+        type="email"
+        value={props.user.email}
+        placeholder="email"
+        onChange={(e) =>
+          props.setUser({ ...props.user, email: e.target.value })
+        }
+        className="bg-gray-100 rounded px-3 py-1 my-1 w-64 border-[1px] border-gray-300"
+      />
+    </div>
   )
 })
 

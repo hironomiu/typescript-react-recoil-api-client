@@ -33,7 +33,7 @@ const Auth = () => {
   }
 
   return (
-    <main className="flex flex-col h-[90vh] items-center justify-center">
+    <main className="flex flex-col h-[86vh] items-center justify-center">
       {isSignIn ? (
         <>
           <h1 className="text-2xl">SignIn</h1>
@@ -44,12 +44,12 @@ const Auth = () => {
               handleClick(e)
             }}
             disabled={user.email && user.password ? false : true}
-            className="bg-gray-400 px-3 py-1 my-1 rounded disabled:bg-gray-100 disabled:text-gray-200"
+            className="bg-gray-400 px-3 py-1 my-1 rounded disabled:bg-gray-100 disabled:text-gray-200 w-64 mt-2"
           >
             SignIn
           </button>
           <span
-            className="border-b-[1px] border-black"
+            className="border-b-[1px] border-black mt-2"
             onClick={() => setIsSignIn(false)}
           >
             SignUp?
@@ -61,11 +61,11 @@ const Auth = () => {
           {/* TODO SignInで使ってるuserで使い回さず別途Stateを用意する */}
           <InputEmail user={user} setUser={setUser} />
           <InputPassword user={user} setUser={setUser} />
-          <button className="bg-gray-400 px-3 py-1 my-1 rounded disabled:bg-gray-100 disabled:text-gray-200">
+          <button className="bg-gray-400 px-3 py-1 my-1 rounded disabled:bg-gray-100 disabled:text-gray-200 w-64 mt-2">
             SignUp
           </button>
           <span
-            className="border-b-[1px] border-black"
+            className="border-b-[1px] border-black mt-2"
             onClick={() => setIsSignIn(true)}
           >
             SignIn?
