@@ -58,3 +58,24 @@ npm install --save-dev @types/react-router-dom
 ```
 npm install --save-dev @babel/core@7.16.12
 ```
+
+### tailwindcss
+
+[公式：installation](https://tailwindcss.com/docs/installation)
+
+```
+npm install --save-dev tailwindcss @types/tailwindcss
+npx tailwindcss init
+```
+
+`tailwind.config.js`を公式の通り作成し`tsx`を追記する
+
+```
+module.exports = {
+  content: ['./src/**/*.{html,js,tsx}'],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+```

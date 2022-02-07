@@ -6,10 +6,14 @@ const Header: FC = () => {
   const isLogin = useRecoilValue(isLoginAtom)
 
   return (
-    <div>
-      Header
-      {isLogin ? <span>Logout?</span> : null}
-    </div>
+    <header className="flex flex-row item-center w-screen">
+      <div className="flex justify-between">
+        <div>
+          <span className="text-sm">Header</span>
+        </div>
+        <div>{isLogin ? <span> Logout? </span> : <span> Login? </span>}</div>
+      </div>
+    </header>
   )
 }
 

@@ -11,7 +11,7 @@ const App = () => {
   }
 
   return (
-    <div>
+    <>
       <RecoilRoot>
         <Suspense fallback={<Fallback />}>
           <Routes>
@@ -22,7 +22,7 @@ const App = () => {
           </Routes>
         </Suspense>
       </RecoilRoot>
-    </div>
+    </>
   )
 }
 

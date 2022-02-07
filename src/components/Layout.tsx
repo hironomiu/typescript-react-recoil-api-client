@@ -23,7 +23,7 @@ const Layout: FC = () => {
   }, [isLogin, navigate])
 
   return (
-    <div>
+    <div className="flex items-center flex-col min-h-screen">
       <Header />
       <Outlet />
       <Footer />
