@@ -23,7 +23,7 @@ const Layout: FC = () => {
   }, [isLogin, navigate])
 
   return (
-    <div className="flex items-center flex-col min-h-screen h-[100v] overflow-y-hidden">
+    <div className="flex items-center flex-col min-h-screen h-[100v] overflow-y-hidde">
       <Header />
       <Outlet />
       <Footer />
