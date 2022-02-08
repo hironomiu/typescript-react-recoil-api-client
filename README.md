@@ -1,5 +1,7 @@
 # typescript-react-recoil-api-client
 
+[![Node.js CI](https://github.com/hironomiu/typescript-react-recoil-api-client/actions/workflows/node.js.yml/badge.svg)](https://github.com/hironomiu/typescript-react-recoil-api-client/actions/workflows/node.js.yml)
+
 [typescript-express-api-server](https://github.com/hironomiu/typescript-express-api-server)のクライアント
 
 ## SetUp
