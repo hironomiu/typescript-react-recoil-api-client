@@ -8,21 +8,33 @@ type User = {
 }
 
 export const useAuth = () => {
-  const fetchPostSignIn = useCallback(async (csrfToken: string, user: User) => {
-    const res = await fetch(API_URL.toString(), {
-      method: 'POST',
-      mode: 'cors',
-      cache: 'no-cache',
-      credentials: 'include',
-      redirect: 'follow',
-      headers: {
-        'Content-Type': 'application/json',
-        'CSRF-Token': csrfToken,
+  try {
+    const fetchPostSignIn = useCallback(
+      async (csrfToken: string, user: User) => {
+        const res = await fetch(API_URL.toString(), {
+          method: 'POST',
+          mode: 'cors',
+          cache: 'no-cache',
+          credentials: 'include',
+          redirect: 'follow',
+          headers: {
+            'Content-Type': 'application/json',
+            'CSRF-Token': csrfToken,
+          },
+          body: JSON.stringify({ ...user }),
+        })
+        const data = await res.json()
+        return data
       },
-      body: JSON.stringify({ ...user }),
+      []
+    )
+    return { fetchPostSignIn }
+  } catch (err) {
+    console.log(err)
+    return new Promise((resolve) => {
+      resolve({ isSuccess: false })
     })
-    const data = await res.json()
-    return data
-  }, [])
-  return { fetchPostSignIn }
+  }
+  //  TODO return
+  // return new Promise((resolve) => resolve({ isSuccess: false }))
 }

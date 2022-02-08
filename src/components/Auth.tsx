@@ -16,7 +16,8 @@ const Auth = () => {
   const csrfToken = useRecoilValue(csrfTokenSelector)
   const [isLogin, setIsLogin] = useRecoilState(isLoginSelector)
   const [user, setUser] = useRecoilState(userSelector)
-  const { fetchPostSignIn } = useAuth()
+  // TODO 型
+  const { fetchPostSignIn }: any = useAuth()
 
   // useStateだがRoutingする時はRecoilで管理させる
   const [isSignIn, setIsSignIn] = useState(true)
