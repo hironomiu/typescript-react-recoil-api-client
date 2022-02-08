@@ -13,6 +13,10 @@ type PROPS = {
 }
 
 const InputEmail = memo((props: PROPS) => {
+  // TODO 型
+  const handleChange = (e: any) => {
+    props.setUser({ ...props.user, email: e.target.value })
+  }
   return (
     <div className="flex flex-col">
       <label htmlFor="">Email</label>
@@ -20,9 +24,7 @@ const InputEmail = memo((props: PROPS) => {
         type="email"
         value={props.user.email}
         placeholder="email"
-        onChange={(e) =>
-          props.setUser({ ...props.user, email: e.target.value })
-        }
+        onChange={handleChange}
         className="bg-gray-100 rounded px-3 py-1 my-1 w-64 border-[1px] border-gray-300"
       />
     </div>
