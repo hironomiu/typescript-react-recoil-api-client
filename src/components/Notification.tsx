@@ -8,7 +8,7 @@ const Notification = () => {
   const isLogin = useRecoilValue(isLoginAtom)
   useEffect(() => {
     if (!isLogin) navigate('/auth')
-  }, [])
+  }, [navigate, isLogin])
   return (
     <div className="flex h-[86vh] justify-center items-center">
       <span>Notification</span>
