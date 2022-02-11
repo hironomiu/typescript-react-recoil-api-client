@@ -2,7 +2,7 @@
 
 [![Node.js CI](https://github.com/hironomiu/typescript-react-recoil-api-client/actions/workflows/node.js.yml/badge.svg)](https://github.com/hironomiu/typescript-react-recoil-api-client/actions/workflows/node.js.yml)
 
-[typescript-express-api-server](https://github.com/hironomiu/typescript-express-api-server)のクライアント
+TypeScript + React + Recoil + React Router DOM による[typescript-express-api-server](https://github.com/hironomiu/typescript-express-api-server)のクライアントアプリ
 
 ## SetUp
 
