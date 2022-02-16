@@ -1,10 +1,8 @@
 import { useEffect, useState } from 'react'
-import { isLoginAtom } from '../recoil/global'
-import { useRecoilValue } from 'recoil'
+import { isLoginAtom, notificationCountSelector } from '../recoil/global'
+import { useRecoilState, useRecoilValue } from 'recoil'
 import { useNavigate } from 'react-router-dom'
-
-const FETCH_GET_NOTIFICATION = '/api/v1/notifications'
-const API_URL = new URL(FETCH_GET_NOTIFICATION, process.env.REACT_APP_API_URL)
+import { useNotification } from '../hooks/useNotification'
 
 type NotificationData = {
   isSuccess: boolean
@@ -20,6 +18,8 @@ const Notification = () => {
     message: 'test',
     data: [{ title: '', notification: '' }],
   })
+  const { fetchGetNotification } = useNotification()
+  const [, setNotificationCount] = useRecoilState(notificationCountSelector)
 
   useEffect(() => {
     if (!isLogin) navigate('/auth')
@@ -27,14 +27,14 @@ const Notification = () => {
 
   useEffect(() => {
     if (isLogin) {
+      console.log('hoge')
       ;(async () => {
-        const res = await fetch(API_URL.toString(), {
-          mode: 'cors',
-          cache: 'no-cache',
-          credentials: 'include',
-        })
-        const data = await res.json()
-        console.log(data.data)
+        // TODO 型
+        const data: any = await fetchGetNotification()
+        // TODO Main読み込み時に設定する
+        setNotificationCount(
+          data.data.filter((data: any) => data.is_confirmed === 0).length
+        )
         setNotifications(data)
       })()
     }
