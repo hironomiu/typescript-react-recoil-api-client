@@ -1,20 +1,15 @@
-import { FC, memo } from 'react'
+import { FC, memo, useState } from 'react'
 import { useRecoilState, useRecoilValue } from 'recoil'
-import {
-  isLoginSelector,
-  csrfTokenSelector,
-  notificationCountAtom,
-} from '../recoil/global'
+import { isLoginSelector, notificationCountAtom } from '../recoil/global'
 import { useNavigate } from 'react-router-dom'
-import { useHeader } from '../hooks/useHeader'
-import { BellIcon } from '@heroicons/react/outline'
+import { BellIcon, LogoutIcon } from '@heroicons/react/outline'
+import SignOutModal from './modal/SignOutModal'
 
 const Header: FC = memo(() => {
-  const [isLogin, setIsLogin] = useRecoilState(isLoginSelector)
+  const [isLogin] = useRecoilState(isLoginSelector)
   const notificationCount = useRecoilValue(notificationCountAtom)
-  const csrfToken = useRecoilValue(csrfTokenSelector)
-  const { fetchGetSignOut } = useHeader()
   const navigate = useNavigate()
+  const [modalOn, setModalOn] = useState(false)
 
   return (
     <header className="flex flex-row item-center border-b-[1px]">
@@ -28,24 +23,21 @@ const Header: FC = memo(() => {
           {isLogin ? (
             <>
               <BellIcon
-                className="h-6 w-6 mr-3 hover:cursor-pointer"
+                className="h-8 w-8 mr-3 hover:cursor-pointer"
                 onClick={() => navigate('/notification')}
               />
               {notificationCount === 0 ? null : (
-                <span className="absolute inline-block text-[5px] top-[10px] right-[83px] bg-red-500 text-white rounded-full text-center h-[12px] w-[12px] leading-[12px]">
+                <span className="absolute inline-block text-[5px] top-[10px] right-[55px] bg-red-500 text-white rounded-full text-center h-[12px] w-[12px] leading-[12px]">
                   {notificationCount}
                 </span>
               )}
-              <span
-                className="hover:cursor-pointer"
-                onClick={async (e) => {
-                  e.preventDefault()
-                  const data = await fetchGetSignOut(csrfToken)
-                  if (data.isSuccess) setIsLogin(false)
+              <LogoutIcon
+                className="h-8 w-8 hover:cursor-pointer"
+                onClick={async () => {
+                  setModalOn(true)
                 }}
-              >
-                Logout
-              </span>
+              />
+              {modalOn ? <SignOutModal setModalOn={setModalOn} /> : null}
             </>
           ) : null}
         </div>
