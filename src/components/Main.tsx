@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import { useRecoilValue, useRecoilState } from 'recoil'
-import { notificationCountSelector } from '../recoil/global'
+import { notificationCountSelector } from '../recoil/notification'
 import { testAtom } from '../recoil/main'
 
 const Main: FC = () => {

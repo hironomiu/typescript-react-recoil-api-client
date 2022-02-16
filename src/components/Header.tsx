@@ -1,6 +1,7 @@
 import { FC, memo, useState } from 'react'
 import { useRecoilState, useRecoilValue } from 'recoil'
-import { isLoginSelector, notificationCountAtom } from '../recoil/global'
+import { isLoginSelector } from '../recoil/global'
+import { notificationCountAtom } from '../recoil/notification'
 import { useNavigate } from 'react-router-dom'
 import { BellIcon, LogoutIcon } from '@heroicons/react/outline'
 import SignOutModal from './modal/SignOutModal'
