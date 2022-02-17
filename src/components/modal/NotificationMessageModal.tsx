@@ -1,18 +1,19 @@
 import { Fragment, useRef, useState, memo } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
-import { BanIcon } from '@heroicons/react/outline'
+import { InformationCircleIcon } from '@heroicons/react/outline'
 
-const ErrorMessageModal = memo(
+const NotificationMessageModal = memo(
   ({
     message,
     setModalOn,
   }: {
-    message: string
+    message: { title: string; notification: string }
     setModalOn: React.Dispatch<React.SetStateAction<boolean>>
   }) => {
     const [open, setOpen] = useState(true)
     const cancelButtonRef = useRef(null)
 
+    console.log(message)
     return (
       <Transition.Root show={open} as={Fragment}>
         <Dialog
@@ -57,15 +58,16 @@ const ErrorMessageModal = memo(
                 <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                   <div className="sm:flex sm:items-center">
                     <div className="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-gray-100 sm:mx-0 sm:h-10 sm:w-10">
-                      <BanIcon />
+                      <InformationCircleIcon />
                     </div>
                     <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                       <Dialog.Title
                         as="h3"
                         className="text-lg leading-6 font-medium text-gray-900"
                       >
-                        {message}
+                        {message.title}
                       </Dialog.Title>
+                      <div>{message.notification}</div>
                     </div>
                   </div>
                 </div>
@@ -91,4 +93,4 @@ const ErrorMessageModal = memo(
   }
 )
 
-export default ErrorMessageModal
+export default NotificationMessageModal

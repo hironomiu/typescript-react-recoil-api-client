@@ -1,8 +1,11 @@
-import { memo } from 'react'
+import { memo, useState } from 'react'
 import { useNotification } from '../hooks/useNotification'
+import NotificationMessageModal from './modal/NotificationMessageModal'
 
 const Notification = memo(() => {
   const { notifications } = useNotification()
+  const [modalOn, setModalOn] = useState(false)
+  const [index, setIndex] = useState(0)
 
   return (
     <div className="flex flex-col h-[86vh] justify-center items-center">
@@ -11,13 +14,23 @@ const Notification = memo(() => {
         {notifications.data.map((notification, index) => (
           <div key={index} className="flex flex-col">
             <div>
-              <span>{notification.title}</span>
+              <span
+                onClick={() => {
+                  setIndex(index)
+                  setModalOn(true)
+                }}
+              >
+                {notification.title}
+              </span>
             </div>
-            {/* <div>
-              <span>{notification.notification}</span>
-            </div> */}
           </div>
         ))}
+        {modalOn ? (
+          <NotificationMessageModal
+            setModalOn={setModalOn}
+            message={notifications.data[index]}
+          />
+        ) : null}
       </div>
     </div>
   )
