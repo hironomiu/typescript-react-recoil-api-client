@@ -1,27 +1,20 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useRecoilValue, useRecoilState } from 'recoil'
 import { isLoginAtom } from '../recoil/global'
-import { notificationCountSelector } from '../recoil/notification'
+import {
+  notificationCountSelector,
+  notificationSelector,
+} from '../recoil/notification'
 
 const FETCH_GET_NOTIFICATION = '/api/v1/notifications'
 const API_URL = new URL(FETCH_GET_NOTIFICATION, process.env.REACT_APP_API_URL)
 
-type NotificationData = {
-  isSuccess: boolean
-  message: string
-  data: { title: string; notification: string; is_confirmed: boolean }[]
-}
-
 export const useNotification = () => {
   const navigate = useNavigate()
   const isLogin = useRecoilValue(isLoginAtom)
-  const [notifications, setNotifications] = useState<NotificationData>({
-    isSuccess: true,
-    message: 'test',
-    data: [{ title: '', notification: '', is_confirmed: false }],
-  })
 
+  const [notifications, setNotifications] = useRecoilState(notificationSelector)
   const [, setNotificationCount] = useRecoilState(notificationCountSelector)
 
   useEffect(() => {
@@ -30,7 +23,6 @@ export const useNotification = () => {
 
   useEffect(() => {
     if (isLogin) {
-      console.log('hoge')
       ;(async () => {
         // TODO 型
         const data: any = await fetchGetNotification()
