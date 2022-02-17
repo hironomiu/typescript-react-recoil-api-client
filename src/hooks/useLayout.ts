@@ -50,7 +50,7 @@ export const useLayout = () => {
         setNotifications(data)
       })()
     }
-  }, [isLogin, setNotifications, setNotificationCount])
+  }, [isLogin, fetchGetNotification, setNotifications, setNotificationCount])
 
   return { fetchGetIsLogin }
 }

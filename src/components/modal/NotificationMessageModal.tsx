@@ -13,7 +13,6 @@ const NotificationMessageModal = memo(
     const [open, setOpen] = useState(true)
     const cancelButtonRef = useRef(null)
 
-    console.log(message)
     return (
       <Transition.Root show={open} as={Fragment}>
         <Dialog
