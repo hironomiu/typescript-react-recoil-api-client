@@ -19,7 +19,12 @@ export const notificationCountSelector = selector<number>({
 type Notification = {
   isSuccess: boolean
   message: string
-  data: { title: string; notification: string; is_confirmed: boolean }[]
+  data: {
+    id: number
+    title: string
+    notification: string
+    is_confirmed: boolean
+  }[]
 }
 
 export const notificationAtom = atom<Notification>({
@@ -27,7 +32,7 @@ export const notificationAtom = atom<Notification>({
   default: {
     isSuccess: true,
     message: 'test',
-    data: [{ title: '', notification: '', is_confirmed: false }],
+    data: [{ id: 0, title: '', notification: '', is_confirmed: false }],
   },
 })
 
