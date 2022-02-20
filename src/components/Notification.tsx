@@ -36,16 +36,31 @@ const Notification = memo(() => {
         {notifications.data.map((notification, index) => (
           <div key={index} className="flex flex-col">
             <div>
-              <span
-                onClick={() => {
-                  setIndex(index)
-                  console.log(notifications.data[index])
-                  updateIsConfirmed(notifications.data[index].id)
-                  setModalOn(true)
-                }}
-              >
-                {notification.title}
-              </span>
+              {notification.is_confirmed ? (
+                <span
+                  className="text-gray-400 hover:cursor-pointer"
+                  onClick={() => {
+                    setIndex(index)
+                    console.log(notifications.data[index])
+                    updateIsConfirmed(notifications.data[index].id)
+                    setModalOn(true)
+                  }}
+                >
+                  {notification.title}
+                </span>
+              ) : (
+                <span
+                  className="text-red-400 hover:cursor-pointer"
+                  onClick={() => {
+                    setIndex(index)
+                    console.log(notifications.data[index])
+                    updateIsConfirmed(notifications.data[index].id)
+                    setModalOn(true)
+                  }}
+                >
+                  {notification.title}
+                </span>
+              )}
             </div>
           </div>
         ))}
