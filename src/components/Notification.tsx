@@ -31,7 +31,7 @@ const Notification = memo(() => {
   }
   return (
     <div className="flex flex-col h-[86vh] justify-center items-center">
-      <h1 className="text-2xl">Notification</h1>
+      <h1 className="text-2xl mb-10">Notification</h1>
       <div>
         {notifications.data.map((notification, index) => (
           <div key={index} className="flex flex-col">
