@@ -10,8 +10,12 @@ import { useAuth } from '../hooks/useAuth'
 import InputEmail from './parts/InputEmail'
 import InputPassword from './parts/InputPassword'
 import ErrorMessageModal from './modal/ErrorMessageModal'
+import InputSignUpNickName from './parts/InputSignUpNickName'
+import InputSignUpEmail from './parts/InputSignUpEmail'
+import InputSignUpPassword from './parts/InputSignUpPassword'
 
 type SignUpUser = {
+  nickname: string
   email: string
   password: string
 }
@@ -21,11 +25,12 @@ const Auth = () => {
   const [isLogin, setIsLogin] = useRecoilState(isLoginSelector)
   const [user, setUser] = useRecoilState(userSelector)
   const [signUpUser, setSignUpUser] = useState<SignUpUser>({
+    nickname: '',
     email: '',
     password: '',
   })
   // TODO 型
-  const { fetchPostSignIn }: any = useAuth()
+  const { fetchPostSignIn, fetchPostSignUp }: any = useAuth()
 
   // useStateだがRoutingする時はRecoilで管理させる
   const [isSignIn, setIsSignIn] = useState(true)
@@ -48,11 +53,12 @@ const Auth = () => {
     }
   }
 
-  const signUpHandleClick = (
+  const signUpHandleClick = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     e.preventDefault()
-    console.log('clicked')
+    const res = await fetchPostSignUp(csrfToken, signUpUser)
+    console.log('signup:', res)
   }
   return (
     <main className="flex flex-col h-[86vh] items-center justify-center">
@@ -81,11 +87,13 @@ const Auth = () => {
       ) : (
         <>
           <h1 className="text-2xl">SignUp</h1>
-          <InputEmail user={signUpUser} setUser={setSignUpUser} />
-          <InputPassword user={signUpUser} setUser={setSignUpUser} />
+          <InputSignUpNickName user={signUpUser} setUser={setSignUpUser} />
+          <InputSignUpEmail user={signUpUser} setUser={setSignUpUser} />
+          <InputSignUpPassword user={signUpUser} setUser={setSignUpUser} />
           <button
             // TODO SignUpの実装
             onClick={signUpHandleClick}
+            disabled={signUpUser.email && signUpUser.password ? false : true}
             className="bg-gray-400 px-3 py-1 my-1 rounded disabled:bg-gray-100 disabled:text-gray-200 w-64 mt-2"
           >
             SignUp
