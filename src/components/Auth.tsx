@@ -48,6 +48,12 @@ const Auth = () => {
     }
   }
 
+  const signUpHandleClick = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    e.preventDefault()
+    console.log('clicked')
+  }
   return (
     <main className="flex flex-col h-[86vh] items-center justify-center">
       {isSignIn ? (
@@ -75,10 +81,13 @@ const Auth = () => {
       ) : (
         <>
           <h1 className="text-2xl">SignUp</h1>
-          {/* TODO SignInで使ってるuserで使い回さず別途Stateを用意する */}
           <InputEmail user={signUpUser} setUser={setSignUpUser} />
           <InputPassword user={signUpUser} setUser={setSignUpUser} />
-          <button className="bg-gray-400 px-3 py-1 my-1 rounded disabled:bg-gray-100 disabled:text-gray-200 w-64 mt-2">
+          <button
+            // TODO SignUpの実装
+            onClick={signUpHandleClick}
+            className="bg-gray-400 px-3 py-1 my-1 rounded disabled:bg-gray-100 disabled:text-gray-200 w-64 mt-2"
+          >
             SignUp
           </button>
           <span
