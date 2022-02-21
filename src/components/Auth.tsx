@@ -11,11 +11,19 @@ import InputEmail from './parts/InputEmail'
 import InputPassword from './parts/InputPassword'
 import ErrorMessageModal from './modal/ErrorMessageModal'
 
+type SignUpUser = {
+  email: string
+  password: string
+}
 const Auth = () => {
   const navigate = useNavigate()
   const csrfToken = useRecoilValue(csrfTokenSelector)
   const [isLogin, setIsLogin] = useRecoilState(isLoginSelector)
   const [user, setUser] = useRecoilState(userSelector)
+  const [signUpUser, setSignUpUser] = useState<SignUpUser>({
+    email: '',
+    password: '',
+  })
   // TODO 型
   const { fetchPostSignIn }: any = useAuth()
 
@@ -51,9 +59,7 @@ const Auth = () => {
           <InputEmail user={user} setUser={setUser} />
           <InputPassword user={user} setUser={setUser} />
           <button
-            onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-              handleClick(e)
-            }}
+            onClick={handleClick}
             disabled={user.email && user.password ? false : true}
             className="bg-gray-400 px-3 py-1 my-1 rounded disabled:bg-gray-100 disabled:text-gray-200 w-64 mt-2"
           >
@@ -70,8 +76,8 @@ const Auth = () => {
         <>
           <h1 className="text-2xl">SignUp</h1>
           {/* TODO SignInで使ってるuserで使い回さず別途Stateを用意する */}
-          <InputEmail user={user} setUser={setUser} />
-          <InputPassword user={user} setUser={setUser} />
+          <InputEmail user={signUpUser} setUser={setSignUpUser} />
+          <InputPassword user={signUpUser} setUser={setSignUpUser} />
           <button className="bg-gray-400 px-3 py-1 my-1 rounded disabled:bg-gray-100 disabled:text-gray-200 w-64 mt-2">
             SignUp
           </button>
