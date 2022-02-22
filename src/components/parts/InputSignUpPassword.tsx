@@ -1,6 +1,11 @@
 import React from 'react'
 
+// TODO 型
 const InputSignUpPassword = (props: any) => {
+  // TODO 型
+  const handleChange = (e: any) => {
+    props.setUser({ ...props.user, password: e.target.value })
+  }
   return (
     <div className="flex flex-col">
       <label htmlFor="">Password</label>
@@ -8,6 +13,8 @@ const InputSignUpPassword = (props: any) => {
         className="w-64 bg-gray-100 rounded border-[1px] border-gray-300 py-1 my-1 px-3"
         type="password"
         placeholder="password"
+        onChange={handleChange}
+        value={props.user.password}
       />
     </div>
   )
