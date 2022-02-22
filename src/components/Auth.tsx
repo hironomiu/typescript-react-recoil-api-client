@@ -93,7 +93,11 @@ const Auth = () => {
           <button
             // TODO SignUpの実装
             onClick={signUpHandleClick}
-            disabled={signUpUser.email && signUpUser.password ? false : true}
+            disabled={
+              signUpUser.nickname && signUpUser.email && signUpUser.password
+                ? false
+                : true
+            }
             className="bg-gray-400 px-3 py-1 my-1 rounded disabled:bg-gray-100 disabled:text-gray-200 w-64 mt-2"
           >
             SignUp
