@@ -1,8 +1,14 @@
-import React from 'react'
-// TODO 型
-const InputSignUpNickName = (props: any) => {
-  // TODO 型
-  const handleChange = (e: any) => {
+import { memo } from 'react'
+
+type PROPS = {
+  user: { nickname: string; email: string; password: string }
+  setUser: React.Dispatch<
+    React.SetStateAction<{ nickname: string; email: string; password: string }>
+  >
+}
+
+const InputSignUpNickName = memo((props: PROPS) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     props.setUser({ ...props.user, nickname: e.target.value })
   }
   return (
@@ -17,6 +23,6 @@ const InputSignUpNickName = (props: any) => {
       />
     </div>
   )
-}
+})
 
 export default InputSignUpNickName

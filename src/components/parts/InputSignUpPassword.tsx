@@ -1,4 +1,4 @@
-import React from 'react'
+import { memo } from 'react'
 
 type PROPS = {
   user: { nickname: string; email: string; password: string }
@@ -6,7 +6,7 @@ type PROPS = {
     React.SetStateAction<{ nickname: string; email: string; password: string }>
   >
 }
-const InputSignUpPassword = (props: PROPS) => {
+const InputSignUpPassword = memo((props: PROPS) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e) {
       props.setUser({ ...props.user, password: e.target.value })
@@ -25,6 +25,6 @@ const InputSignUpPassword = (props: PROPS) => {
       />
     </div>
   )
-}
+})
 
 export default InputSignUpPassword
