@@ -1,7 +1,11 @@
 import React from 'react'
 
-// TODO 型
-const InputSignUpPassword = (props: any) => {
+type PROPS = {
+  user: { nickname: string; email: string; password: string }
+  // TODO 型
+  setUser: React.Dispatch<React.SetStateAction<any>>
+}
+const InputSignUpPassword = (props: PROPS) => {
   // TODO 型
   const handleChange = (e: any) => {
     props.setUser({ ...props.user, password: e.target.value })
