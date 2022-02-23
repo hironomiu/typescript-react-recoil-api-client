@@ -7,10 +7,12 @@ type PROPS = {
   >
 }
 const InputSignUpPassword = (props: PROPS) => {
-  // TODO 型
-  const handleChange = (e: any) => {
-    props.setUser({ ...props.user, password: e.target.value })
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e) {
+      props.setUser({ ...props.user, password: e.target.value })
+    }
   }
+
   return (
     <div className="flex flex-col">
       <label htmlFor="">Password</label>
