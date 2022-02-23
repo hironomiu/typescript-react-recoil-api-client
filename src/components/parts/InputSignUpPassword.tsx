@@ -2,8 +2,9 @@ import React from 'react'
 
 type PROPS = {
   user: { nickname: string; email: string; password: string }
-  // TODO 型
-  setUser: React.Dispatch<React.SetStateAction<any>>
+  setUser: React.Dispatch<
+    React.SetStateAction<{ nickname: string; email: string; password: string }>
+  >
 }
 const InputSignUpPassword = (props: PROPS) => {
   // TODO 型
