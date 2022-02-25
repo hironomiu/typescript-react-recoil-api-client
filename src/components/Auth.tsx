@@ -45,12 +45,7 @@ const Auth = () => {
   ) => {
     e.preventDefault()
     const res = await fetchPostSignIn(csrfToken, user)
-    console.log(res)
-    if (res.isSuccess === true) {
-      setIsLogin(true)
-    } else {
-      setModalOn(true)
-    }
+    res.isSuccess ? setIsLogin(true) : setModalOn(true)
   }
 
   const signUpHandleClick = async (
