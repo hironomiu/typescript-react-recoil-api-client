@@ -18,7 +18,7 @@ const Auth = () => {
   const navigate = useNavigate()
   const csrfToken = useRecoilValue(csrfTokenSelector)
   const [isLogin, setIsLogin] = useRecoilState(isLoginSelector)
-  const [user, setUser] = useRecoilState(userSelector)
+  const [, setUser] = useRecoilState(userSelector)
   // TODO 型
   const {
     signInUser,
