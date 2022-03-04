@@ -1,6 +1,6 @@
 import { FC, memo, useState } from 'react'
 import { useRecoilState, useRecoilValue } from 'recoil'
-import { isLoginSelector } from '../recoil/global'
+import { isLoginSelector, userAtom } from '../recoil/global'
 import { notificationCountAtom } from '../recoil/notification'
 import { useNavigate } from 'react-router-dom'
 import { BellIcon, LogoutIcon } from '@heroicons/react/outline'
@@ -9,6 +9,7 @@ import SignOutModal from './modal/SignOutModal'
 const Header: FC = memo(() => {
   const [isLogin] = useRecoilState(isLoginSelector)
   const notificationCount = useRecoilValue(notificationCountAtom)
+  const user = useRecoilValue(userAtom)
   const navigate = useNavigate()
   const [modalOn, setModalOn] = useState(false)
 
@@ -21,7 +22,7 @@ const Header: FC = memo(() => {
             onClick={() => navigate('/')}
             data-testid="header"
           >
-            Header
+            Header{isLogin ? ':' + user.nickname : null}
           </span>
         </div>
         <div className="m-3 flex items-center">

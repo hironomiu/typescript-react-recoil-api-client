@@ -4,10 +4,10 @@ const API_URL = process.env.REACT_APP_API_URL
 
 export const userAtom = atom({
   key: 'userAtom',
-  default: { email: 'taro@example.com', password: 'password' },
+  default: { email: '', nickname: '' },
 })
 
-export const userSelector = selector<{ email: string; password: string }>({
+export const userSelector = selector<{ email: string; nickname: string }>({
   key: 'userSelector',
   get: ({ get }) => {
     const user = get(userAtom)
