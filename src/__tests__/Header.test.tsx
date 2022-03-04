@@ -19,6 +19,7 @@ describe('', () => {
     )
 
     await waitFor(() => {
+      screen.debug()
       screen.getByText('Header')
     })
     expect(screen.getByTestId('header')).toBeInTheDocument()

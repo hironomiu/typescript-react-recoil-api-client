@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useRecoilValue, useRecoilState } from 'recoil'
 import { isLoginAtom, csrfTokenSelector } from '../recoil/global'
@@ -15,6 +15,16 @@ export const useNotification = () => {
   const isLogin = useRecoilValue(isLoginAtom)
   const [notifications] = useRecoilState(notificationSelector)
 
+  // TODO Recoil?
+  const [index, setIndex] = useState(0)
+  const [modalOn, setModalOn] = useState(false)
+
+  const handleClick = () => {
+    setIndex(index)
+    console.log(notifications.data[index])
+    updateIsConfirmed(notifications.data[index].id)
+    setModalOn(true)
+  }
   const updateIsConfirmed = (id: number) => {
     fetch(NOTIFICATION_API_URL.toString(), {
       method: 'PUT',
@@ -31,5 +41,12 @@ export const useNotification = () => {
     if (!isLogin) navigate('/auth')
   }, [navigate, isLogin])
 
-  return { notifications, updateIsConfirmed }
+  return {
+    notifications,
+    updateIsConfirmed,
+    handleClick,
+    modalOn,
+    setModalOn,
+    index,
+  }
 }

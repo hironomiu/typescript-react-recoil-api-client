@@ -1,18 +1,25 @@
-import { useCallback } from 'react'
+import { useCallback, useState } from 'react'
+import { SignUpUser, SignInUser } from '../types'
+
 const FETCH_POST_SIGNIN = '/api/v1/auth/signin'
-const API_URL = new URL(FETCH_POST_SIGNIN, process.env.REACT_APP_API_URL)
+const SIGNIN_API_URL = new URL(FETCH_POST_SIGNIN, process.env.REACT_APP_API_URL)
 const FETCH_POST_SIGNUP = '/api/v1/auth/signup'
 const SIGNUP_API_URL = new URL(FETCH_POST_SIGNUP, process.env.REACT_APP_API_URL)
-type User = {
-  email: string
-  password: string
-}
 
 export const useAuth = () => {
+  const [signInUser, setSignInUser] = useState<SignInUser>({
+    email: 'taro@example.com',
+    password: 'password',
+  })
+  const [signUpUser, setSignUpUser] = useState<SignUpUser>({
+    nickname: '',
+    email: '',
+    password: '',
+  })
   try {
     const fetchPostSignIn = useCallback(
-      async (csrfToken: string, user: User) => {
-        const res = await fetch(API_URL.toString(), {
+      async (csrfToken: string, user: SignInUser) => {
+        const res = await fetch(SIGNIN_API_URL.toString(), {
           method: 'POST',
           mode: 'cors',
           cache: 'no-cache',
@@ -30,7 +37,7 @@ export const useAuth = () => {
       []
     )
 
-    const fetchPostSignUp = async (csrfToken: string, user: User) => {
+    const fetchPostSignUp = async (csrfToken: string, user: SignInUser) => {
       const res = await fetch(SIGNUP_API_URL.toString(), {
         method: 'POST',
         mode: 'cors',
@@ -46,13 +53,21 @@ export const useAuth = () => {
       const data = await res.json()
       return data
     }
-    return { fetchPostSignIn, fetchPostSignUp }
+    return {
+      fetchPostSignIn,
+      fetchPostSignUp,
+      signInUser,
+      setSignInUser,
+      signUpUser,
+      setSignUpUser,
+    }
   } catch (err) {
     console.log(err)
     return new Promise((resolve) => {
       resolve({ isSuccess: false })
     })
   }
+
   //  TODO return
   // return new Promise((resolve) => resolve({ isSuccess: false }))
 }

@@ -14,23 +14,20 @@ import InputSignUpNickName from './parts/InputSignUpNickName'
 import InputSignUpEmail from './parts/InputSignUpEmail'
 import InputSignUpPassword from './parts/InputSignUpPassword'
 
-type SignUpUser = {
-  nickname: string
-  email: string
-  password: string
-}
 const Auth = () => {
   const navigate = useNavigate()
   const csrfToken = useRecoilValue(csrfTokenSelector)
   const [isLogin, setIsLogin] = useRecoilState(isLoginSelector)
   const [user, setUser] = useRecoilState(userSelector)
-  const [signUpUser, setSignUpUser] = useState<SignUpUser>({
-    nickname: '',
-    email: '',
-    password: '',
-  })
   // TODO 型
-  const { fetchPostSignIn, fetchPostSignUp }: any = useAuth()
+  const {
+    signInUser,
+    setSignInUser,
+    signUpUser,
+    setSignUpUser,
+    fetchPostSignIn,
+    fetchPostSignUp,
+  }: any = useAuth()
 
   // useStateだがRoutingする時はRecoilで管理させる
   const [isSignIn, setIsSignIn] = useState(true)
@@ -40,11 +37,11 @@ const Auth = () => {
     if (isLogin) navigate('/')
   }, [isLogin, navigate])
 
-  const handleClick = async (
+  const signInhandleClick = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     e.preventDefault()
-    const res = await fetchPostSignIn(csrfToken, user)
+    const res = await fetchPostSignIn(csrfToken, signInUser)
     res.isSuccess ? setIsLogin(true) : setModalOn(true)
   }
 
@@ -63,11 +60,11 @@ const Auth = () => {
             <ErrorMessageModal message="SignIn Error" setModalOn={setModalOn} />
           ) : null}
           <h1 className="text-2xl">SignIn</h1>
-          <InputEmail user={user} setUser={setUser} />
-          <InputPassword user={user} setUser={setUser} />
+          <InputEmail user={signInUser} setUser={setSignInUser} />
+          <InputPassword user={signInUser} setUser={setSignInUser} />
           <button
-            onClick={handleClick}
-            disabled={user.email && user.password ? false : true}
+            onClick={signInhandleClick}
+            disabled={signInUser.email && signInUser.password ? false : true}
             className="bg-gray-400 px-3 py-1 my-1 rounded disabled:bg-gray-100 disabled:text-gray-200 w-64 mt-2"
           >
             SignIn

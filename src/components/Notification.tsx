@@ -1,11 +1,10 @@
-import { memo, useState } from 'react'
+import { memo } from 'react'
 import { useNotification } from '../hooks/useNotification'
 import NotificationMessageModal from './modal/NotificationMessageModal'
 
 const Notification = memo(() => {
-  const { notifications, updateIsConfirmed } = useNotification()
-  const [modalOn, setModalOn] = useState(false)
-  const [index, setIndex] = useState(0)
+  const { notifications, handleClick, modalOn, setModalOn, index } =
+    useNotification()
 
   return (
     <div className="flex flex-col h-[86vh] justify-center items-center">
@@ -17,24 +16,14 @@ const Notification = memo(() => {
               {notification.is_confirmed ? (
                 <span
                   className="text-gray-400 hover:cursor-pointer"
-                  onClick={() => {
-                    setIndex(index)
-                    console.log(notifications.data[index])
-                    updateIsConfirmed(notifications.data[index].id)
-                    setModalOn(true)
-                  }}
+                  onClick={handleClick}
                 >
                   {notification.title}
                 </span>
               ) : (
                 <span
                   className="text-red-400 hover:cursor-pointer"
-                  onClick={() => {
-                    setIndex(index)
-                    console.log(notifications.data[index])
-                    updateIsConfirmed(notifications.data[index].id)
-                    setModalOn(true)
-                  }}
+                  onClick={handleClick}
                 >
                   {notification.title}
                 </span>
