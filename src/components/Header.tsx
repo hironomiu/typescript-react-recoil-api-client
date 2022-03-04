@@ -16,7 +16,11 @@ const Header: FC = memo(() => {
     <header className="flex flex-row item-center border-b-[1px]">
       <div className="flex justify-between w-screen text-xl">
         <div className=" m-3">
-          <span className="hover:cursor-pointer" onClick={() => navigate('/')}>
+          <span
+            className="hover:cursor-pointer"
+            onClick={() => navigate('/')}
+            data-testid="header"
+          >
             Header
           </span>
         </div>
