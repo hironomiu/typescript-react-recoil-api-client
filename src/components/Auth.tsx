@@ -13,13 +13,13 @@ import ErrorMessageModal from './modal/ErrorMessageModal'
 import InputSignUpNickName from './parts/InputSignUpNickName'
 import InputSignUpEmail from './parts/InputSignUpEmail'
 import InputSignUpPassword from './parts/InputSignUpPassword'
+import { SignInUser, SignUpUser } from '../types'
 
 const Auth = () => {
   const navigate = useNavigate()
   const csrfToken = useRecoilValue(csrfTokenSelector)
   const [isLogin, setIsLogin] = useRecoilState(isLoginSelector)
   const [, setUser] = useRecoilState(userSelector)
-  // TODO 型
   const {
     signInUser,
     setSignInUser,
@@ -27,7 +27,15 @@ const Auth = () => {
     setSignUpUser,
     fetchPostSignIn,
     fetchPostSignUp,
-  }: any = useAuth()
+  }: {
+    signInUser: SignInUser
+    setSignInUser: React.Dispatch<React.SetStateAction<SignInUser>>
+    signUpUser: SignUpUser
+    setSignUpUser: React.Dispatch<React.SetStateAction<SignUpUser>>
+    // TODO 型
+    fetchPostSignIn: any
+    fetchPostSignUp: any
+  } = useAuth()
 
   // useStateだがRoutingする時はRecoilで管理させる
   const [isSignIn, setIsSignIn] = useState(true)

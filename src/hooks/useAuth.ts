@@ -63,9 +63,18 @@ export const useAuth = () => {
     }
   } catch (err) {
     console.log(err)
-    return new Promise((resolve) => {
-      resolve({ isSuccess: false })
-    })
+    // TODO return
+    return {
+      fetchPostSignIn() {},
+      fetchPostSignUp() {},
+      signInUser,
+      setSignInUser,
+      signUpUser,
+      setSignUpUser,
+    }
+    // return new Promise((resolve) => {
+    //   resolve({ isSuccess: false })
+    // })
   }
 
   //  TODO return
