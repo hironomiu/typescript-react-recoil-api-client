@@ -6,6 +6,11 @@ const SIGNIN_API_URL = new URL(FETCH_POST_SIGNIN, process.env.REACT_APP_API_URL)
 const FETCH_POST_SIGNUP = '/api/v1/auth/signup'
 const SIGNUP_API_URL = new URL(FETCH_POST_SIGNUP, process.env.REACT_APP_API_URL)
 
+type ResData = {
+  isSuccess: boolean
+  nickname: string
+  email: string
+}
 export const useAuth = () => {
   const [signInUser, setSignInUser] = useState<SignInUser>({
     email: 'taro@example.com',
@@ -31,7 +36,7 @@ export const useAuth = () => {
           },
           body: JSON.stringify({ ...user }),
         })
-        const data = await res.json()
+        const data = (await res.json()) as ResData
         return data
       },
       []

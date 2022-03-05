@@ -20,6 +20,7 @@ const Auth = () => {
   const csrfToken = useRecoilValue(csrfTokenSelector)
   const [isLogin, setIsLogin] = useRecoilState(isLoginSelector)
   const [, setUser] = useRecoilState(userSelector)
+
   const {
     signInUser,
     setSignInUser,
@@ -33,8 +34,8 @@ const Auth = () => {
     signUpUser: SignUpUser
     setSignUpUser: React.Dispatch<React.SetStateAction<SignUpUser>>
     // TODO 型
-    fetchPostSignIn: any
-    fetchPostSignUp: any
+    fetchPostSignIn: (csrfToken: string, user: SignInUser) => any
+    fetchPostSignUp: (csrfToken: string, user: SignInUser) => any
   } = useAuth()
 
   // useStateだがRoutingする時はRecoilで管理させる
