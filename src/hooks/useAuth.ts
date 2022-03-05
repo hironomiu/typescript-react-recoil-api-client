@@ -36,7 +36,7 @@ export const useAuth = () => {
           },
           body: JSON.stringify({ ...user }),
         })
-        const data = (await res.json()) as ResData
+        const data: ResData = await res.json()
         return data
       },
       []
