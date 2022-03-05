@@ -63,6 +63,10 @@ const Auth = () => {
     const res = await fetchPostSignUp(csrfToken, signUpUser)
     console.log('signup:', res)
   }
+
+  const handleTrue = () => setIsSignIn(true)
+  const handleFalse = () => setIsSignIn(false)
+
   return (
     <main className="flex flex-col h-[86vh] items-center justify-center">
       {isSignIn ? (
@@ -82,19 +86,19 @@ const Auth = () => {
           </button>
           <span
             className="border-b-[1px] border-black mt-2 hover:cursor-pointer"
-            onClick={() => setIsSignIn(false)}
+            onClick={handleFalse}
           >
             SignUp?
           </span>
         </>
       ) : (
         <>
+          {/* TODO modalの実装 */}
           <h1 className="text-2xl">SignUp</h1>
           <InputSignUpNickName user={signUpUser} setUser={setSignUpUser} />
           <InputSignUpEmail user={signUpUser} setUser={setSignUpUser} />
           <InputSignUpPassword user={signUpUser} setUser={setSignUpUser} />
           <button
-            // TODO SignUpの実装
             onClick={signUpHandleClick}
             disabled={
               signUpUser.nickname && signUpUser.email && signUpUser.password
@@ -107,7 +111,7 @@ const Auth = () => {
           </button>
           <span
             className="border-b-[1px] border-black mt-2 hover:cursor-pointer"
-            onClick={() => setIsSignIn(true)}
+            onClick={handleTrue}
           >
             SignIn?
           </span>
