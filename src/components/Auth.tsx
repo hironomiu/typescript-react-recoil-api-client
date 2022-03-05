@@ -61,6 +61,7 @@ const Auth = () => {
   ) => {
     e.preventDefault()
     const res = await fetchPostSignUp(csrfToken, signUpUser)
+    if (!res.isSuccess) setModalOn(true)
     console.log('signup:', res)
   }
 
@@ -93,7 +94,9 @@ const Auth = () => {
         </>
       ) : (
         <>
-          {/* TODO modalの実装 */}
+          {modalOn ? (
+            <ErrorMessageModal message="SignUp Error" setModalOn={setModalOn} />
+          ) : null}
           <h1 className="text-2xl">SignUp</h1>
           <InputSignUpNickName user={signUpUser} setUser={setSignUpUser} />
           <InputSignUpEmail user={signUpUser} setUser={setSignUpUser} />
