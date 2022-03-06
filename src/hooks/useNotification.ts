@@ -16,11 +16,11 @@ export const useNotification = () => {
   const [notifications] = useRecoilState(notificationSelector)
 
   // TODO Recoil?
-  const [index, setIndex] = useState(0)
+  const [modalNotiricationIndex, setModalNotiricationIndex] = useState(0)
   const [modalOn, setModalOn] = useState(false)
 
-  const handleClick = () => {
-    setIndex(index)
+  const handleClick = (index: number) => {
+    setModalNotiricationIndex(index)
     console.log(notifications.data[index])
     updateIsConfirmed(notifications.data[index].id)
     setModalOn(true)
@@ -47,6 +47,6 @@ export const useNotification = () => {
     handleClick,
     modalOn,
     setModalOn,
-    index,
+    modalNotiricationIndex,
   }
 }
