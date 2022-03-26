@@ -20,15 +20,17 @@ export const useNotification = () => {
   const [modalOn, setModalOn] = useState(false)
 
   // TODO クリック後にカウントを減算、colorを変更
-  const handleClick = (index: number) => {
+  const handleClick = async (index: number) => {
     setModalNotiricationIndex(index)
     console.log(notifications.data[index])
     console.log(notifications)
-    updateIsConfirmed(notifications.data[index].id)
+    const jsonData = await updateIsConfirmed(notifications.data[index].id)
+    // TODO jsonData.isSuccess === falseの時の仕様を決める
+    console.log(jsonData)
     setModalOn(true)
   }
-  const updateIsConfirmed = (id: number) => {
-    fetch(NOTIFICATION_API_URL.toString(), {
+  const updateIsConfirmed = async (id: number) => {
+    const res = await fetch(NOTIFICATION_API_URL.toString(), {
       method: 'PUT',
       credentials: 'include',
       headers: {
@@ -37,6 +39,7 @@ export const useNotification = () => {
       },
       body: JSON.stringify({ id: id }),
     })
+    return res.json()
   }
 
   useEffect(() => {
