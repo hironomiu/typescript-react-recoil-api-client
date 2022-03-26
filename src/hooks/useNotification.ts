@@ -19,6 +19,7 @@ export const useNotification = () => {
   const [modalNotiricationIndex, setModalNotiricationIndex] = useState(0)
   const [modalOn, setModalOn] = useState(false)
 
+  // TODO クリック後にカウントを減算、colorを変更
   const handleClick = (index: number) => {
     setModalNotiricationIndex(index)
     console.log(notifications.data[index])

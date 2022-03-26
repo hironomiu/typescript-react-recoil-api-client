@@ -46,7 +46,8 @@ export const useLayout = () => {
         const res: ResFetchGetNotification = await fetchGetNotification()
         setNotificationCount(
           res.data.filter(
-            (data: ResFetchGetNotificationData) => data.is_confirmed === false
+            (data: ResFetchGetNotificationData) =>
+              Boolean(data.is_confirmed) === false
           ).length
         )
         setNotifications(res)

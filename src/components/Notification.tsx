@@ -26,6 +26,7 @@ const Notification = memo(() => {
                   {notification.title}
                 </span>
               ) : (
+                // TODO クリック後にカウントを減算、colorを変更
                 <span
                   className="text-red-400 hover:cursor-pointer"
                   onClick={() => handleClick(index)}
