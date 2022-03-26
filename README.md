@@ -102,4 +102,5 @@ npm install @heroicons/react
 
 ```
 npm install msw
+npm install --save-dev whatwg-fetch
 ```

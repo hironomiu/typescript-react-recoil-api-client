@@ -89,6 +89,7 @@ const Auth = () => {
           <span
             className="border-b-[1px] border-black mt-2 hover:cursor-pointer"
             onClick={handleFalse}
+            data-testid="span-q-signup"
           >
             SignUp?
           </span>
@@ -116,6 +117,7 @@ const Auth = () => {
           <span
             className="border-b-[1px] border-black mt-2 hover:cursor-pointer"
             onClick={handleTrue}
+            data-testid="span-q-signin"
           >
             SignIn?
           </span>

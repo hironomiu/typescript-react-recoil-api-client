@@ -14,7 +14,6 @@ const Layout: FC = () => {
   useEffect(() => {
     ;(async () => {
       const data = await fetchGetIsLogin()
-      console.log(data)
       if (data.isSuccess) setIsLogin(true)
     })()
   }, [fetchGetIsLogin, setIsLogin])
