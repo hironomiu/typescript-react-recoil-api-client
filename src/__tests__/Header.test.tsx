@@ -3,6 +3,30 @@ import '@testing-library/jest-dom'
 import { RecoilRoot } from 'recoil'
 import { Suspense } from 'react'
 import Header from '../components/Header'
+import { rest } from 'msw'
+import { setupServer } from 'msw/node'
+import { BrowserRouter } from 'react-router-dom'
+
+// TODO msw使う
+const handlers = [
+  rest.get(
+    'http://localhost:5550/api/v1/auth/notifications',
+    (req, res, ctx) => {
+      return res(
+        ctx.status(200),
+        ctx.json([
+          {
+            id: 1,
+            title: 'hoge',
+            notification: 'fuga',
+            is_confirmed: 0,
+          },
+        ])
+      )
+    }
+  ),
+]
+const server = setupServer(...handlers)
 
 const Fallback = () => {
   return <div>Loading...</div>
@@ -11,26 +35,20 @@ const Fallback = () => {
 describe('', () => {
   it('', async () => {
     render(
-      <RecoilRoot>
-        <Suspense fallback={<Fallback />}>
-          <Header />
-        </Suspense>
-      </RecoilRoot>
+      <BrowserRouter>
+        <RecoilRoot>
+          <Suspense fallback={<Fallback />}>
+            <Header />
+          </Suspense>
+        </RecoilRoot>
+      </BrowserRouter>
     )
 
-    await waitFor(() => {
-      screen.debug()
-      screen.getByText('Header')
-    })
-    expect(screen.getByTestId('header')).toBeInTheDocument()
-
-    // TODO Suspenseを通す
-    //   <body>
-    //   <div>
-    //     <div>
-    //       Loading...
-    //     </div>
-    //   </div>
-    //   </body>
+    expect(screen.getByText('Loading...')).toBeInTheDocument()
+    expect(
+      await screen.findByText('Header', undefined, {
+        timeout: 1000,
+      })
+    ).toBeInTheDocument()
   })
 })

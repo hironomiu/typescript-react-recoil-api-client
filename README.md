@@ -97,3 +97,9 @@ npm install @headlessui/react
 ```
 npm install @heroicons/react
 ```
+
+### msw
+
+```
+npm install msw
+```
