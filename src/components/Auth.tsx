@@ -13,7 +13,12 @@ import ErrorMessageModal from './modal/ErrorMessageModal'
 import InputSignUpNickName from './parts/InputSignUpNickName'
 import InputSignUpEmail from './parts/InputSignUpEmail'
 import InputSignUpPassword from './parts/InputSignUpPassword'
-import { SignInUser, SignUpUser } from '../types'
+import {
+  SignInUser,
+  SignUpUser,
+  ResFetchPostSignIn,
+  ResFetchPostSignUp,
+} from '../types'
 
 const Auth = () => {
   const navigate = useNavigate()
@@ -33,9 +38,14 @@ const Auth = () => {
     setSignInUser: React.Dispatch<React.SetStateAction<SignInUser>>
     signUpUser: SignUpUser
     setSignUpUser: React.Dispatch<React.SetStateAction<SignUpUser>>
-    // TODO 型
-    fetchPostSignIn: (csrfToken: string, user: SignInUser) => any
-    fetchPostSignUp: (csrfToken: string, user: SignInUser) => any
+    fetchPostSignIn: (
+      csrfToken: string,
+      user: SignInUser
+    ) => Promise<ResFetchPostSignIn> | void
+    fetchPostSignUp: (
+      csrfToken: string,
+      user: SignInUser
+    ) => Promise<ResFetchPostSignUp> | void
   } = useAuth()
 
   // useStateだがRoutingする時はRecoilで管理させる
@@ -51,7 +61,7 @@ const Auth = () => {
   ) => {
     e.preventDefault()
     const res = await fetchPostSignIn(csrfToken, signInUser)
-    if (res.isSuccess) {
+    if (res?.isSuccess) {
       setIsLogin(true)
       setUser({ nickname: res.nickname, email: res.email })
     } else setModalOn(true)
@@ -62,7 +72,7 @@ const Auth = () => {
   ) => {
     e.preventDefault()
     const res = await fetchPostSignUp(csrfToken, signUpUser)
-    if (!res.isSuccess) setModalOn(true)
+    if (!res?.isSuccess) setModalOn(true)
     console.log('signup:', res)
   }
 

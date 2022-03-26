@@ -1,16 +1,15 @@
 import { useCallback, useState } from 'react'
-import { SignUpUser, SignInUser } from '../types'
-
+import {
+  SignUpUser,
+  SignInUser,
+  ResFetchPostSignIn,
+  ResFetchPostSignUp,
+} from '../types'
 const FETCH_POST_SIGNIN = '/api/v1/auth/signin'
 const SIGNIN_API_URL = new URL(FETCH_POST_SIGNIN, process.env.REACT_APP_API_URL)
 const FETCH_POST_SIGNUP = '/api/v1/auth/signup'
 const SIGNUP_API_URL = new URL(FETCH_POST_SIGNUP, process.env.REACT_APP_API_URL)
 
-type ResData = {
-  isSuccess: boolean
-  nickname: string
-  email: string
-}
 export const useAuth = () => {
   const [signInUser, setSignInUser] = useState<SignInUser>({
     email: 'taro@example.com',
@@ -36,7 +35,7 @@ export const useAuth = () => {
           },
           body: JSON.stringify({ ...user }),
         })
-        const data: ResData = await res.json()
+        const data: ResFetchPostSignIn = await res.json()
         return data
       },
       []
@@ -55,7 +54,7 @@ export const useAuth = () => {
         },
         body: JSON.stringify({ ...user }),
       })
-      const data = await res.json()
+      const data: ResFetchPostSignUp = await res.json()
       return data
     }
     return {
