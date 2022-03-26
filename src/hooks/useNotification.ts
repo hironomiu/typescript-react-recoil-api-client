@@ -23,6 +23,7 @@ export const useNotification = () => {
   const handleClick = (index: number) => {
     setModalNotiricationIndex(index)
     console.log(notifications.data[index])
+    console.log(notifications)
     updateIsConfirmed(notifications.data[index].id)
     setModalOn(true)
   }

@@ -25,16 +25,17 @@ export type ResFetchPostSignUp = {
   insertId: number
 }
 
-// use useLayout
-export type ResFetchGetNotificationData = {
+// use useLayout recoil/notification
+export type NotificationData = {
   id: number
   title: string
   notification: string
   is_confirmed: boolean
 }
-// use useLayout
-export type ResFetchGetNotification = {
-  data: ResFetchGetNotificationData[]
+
+// use useLayout recoil/notification
+export type Notification = {
   isSuccess: boolean
   message: string
+  data: NotificationData[]
 }

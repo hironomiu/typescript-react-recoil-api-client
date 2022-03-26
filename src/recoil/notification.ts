@@ -1,4 +1,5 @@
 import { atom, selector } from 'recoil'
+import { Notification, NotificationData } from '../types'
 
 export const notificationCountAtom = atom<number>({
   key: 'notificationCountAtom',
@@ -15,17 +16,6 @@ export const notificationCountSelector = selector<number>({
     set(notificationCountAtom, newValue)
   },
 })
-
-type Notification = {
-  isSuccess: boolean
-  message: string
-  data: {
-    id: number
-    title: string
-    notification: string
-    is_confirmed: boolean
-  }[]
-}
 
 export const notificationAtom = atom<Notification>({
   key: 'notificationAtom',

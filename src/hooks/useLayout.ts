@@ -5,7 +5,7 @@ import {
   notificationCountSelector,
   notificationSelector,
 } from '../recoil/notification'
-import { ResFetchGetNotification, ResFetchGetNotificationData } from '../types'
+import { Notification, NotificationData } from '../types'
 
 const FETCH_GET_IS_LOGIN = '/api/v1/auth/signin'
 const API_URL = new URL(FETCH_GET_IS_LOGIN, process.env.REACT_APP_API_URL)
@@ -27,7 +27,7 @@ export const useLayout = () => {
       cache: 'no-cache',
       credentials: 'include',
     })
-    const data: ResFetchGetNotification = await res.json()
+    const data: Notification = await res.json()
     return data
   }, [])
 
@@ -43,11 +43,10 @@ export const useLayout = () => {
   useEffect(() => {
     if (isLogin) {
       ;(async () => {
-        const res: ResFetchGetNotification = await fetchGetNotification()
+        const res: Notification = await fetchGetNotification()
         setNotificationCount(
           res.data.filter(
-            (data: ResFetchGetNotificationData) =>
-              Boolean(data.is_confirmed) === false
+            (data: NotificationData) => Boolean(data.is_confirmed) === false
           ).length
         )
         setNotifications(res)
