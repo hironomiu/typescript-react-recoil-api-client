@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import { RecoilRoot } from 'recoil'
+import { RecoilRoot, SetRecoilState } from 'recoil'
 import { Suspense } from 'react'
 import Header from '../components/Header'
 import { BrowserRouter } from 'react-router-dom'
@@ -29,8 +29,8 @@ describe('Header', () => {
       })
     ).toBeInTheDocument()
   })
-  it('SignIn済み', async () => {
-    const initializeState = ({ set }: any) => {
+  it('モックによりSignIn済み、ベルアイコンとログアウトアイコンが存在すること', async () => {
+    const initializeState = ({ set }: { set: SetRecoilState }) => {
       set(isLoginAtom, true)
     }
     render(
@@ -43,5 +43,7 @@ describe('Header', () => {
       </BrowserRouter>
     )
     expect(await screen.findByText('Header:')).toBeInTheDocument()
+    expect(screen.getByTestId('bell-icon')).toBeTruthy()
+    expect(screen.getByTestId('logout-icon')).toBeTruthy()
   })
 })

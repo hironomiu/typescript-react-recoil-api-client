@@ -44,6 +44,7 @@ export const useLayout = () => {
       ;(async () => {
         // TODO 型
         const data: any = await fetchGetNotification()
+        // TODO 型
         setNotificationCount(
           data.data.filter((data: any) => data.is_confirmed === 0).length
         )

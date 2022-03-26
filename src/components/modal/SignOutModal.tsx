@@ -5,6 +5,7 @@ import { useRecoilState, useRecoilValue } from 'recoil'
 import { isLoginSelector, csrfTokenSelector } from '../../recoil/global'
 import { useHeader } from '../../hooks/useHeader'
 
+// TODO 型
 const SignOutModal = memo(({ setModalOn }: any) => {
   const [open, setOpen] = useState(true)
   const [, setIsLogin] = useRecoilState(isLoginSelector)
