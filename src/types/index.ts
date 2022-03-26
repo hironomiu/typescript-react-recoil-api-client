@@ -4,7 +4,7 @@ export type SignInUser = {
   password: string
 }
 
-// use useAuth
+// use useAuth inputSignUpEmail
 export type SignUpUser = {
   nickname: string
   email: string
@@ -23,4 +23,18 @@ export type ResFetchPostSignUp = {
   isSuccess: boolean
   message: string
   insertId: number
+}
+
+// use useLayout
+export type ResFetchGetNotificationData = {
+  id: number
+  title: string
+  notification: string
+  is_confirmed: boolean
+}
+// use useLayout
+export type ResFetchGetNotification = {
+  data: ResFetchGetNotificationData[]
+  isSuccess: boolean
+  message: string
 }

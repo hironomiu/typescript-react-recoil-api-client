@@ -13,8 +13,7 @@ type PROPS = {
 }
 
 const InputEmail = memo((props: PROPS) => {
-  // TODO 型
-  const handleChange = (e: any) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     props.setUser({ ...props.user, email: e.target.value })
   }
   return (

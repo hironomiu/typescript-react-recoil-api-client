@@ -1,9 +1,11 @@
 import React from 'react'
+import { SignUpUser } from '../../types'
 
-// TODO 型
-const InputSignUpEmail = (props: any) => {
-  // TODO 型
-  const handleChange = (e: any) => {
+const InputSignUpEmail = (props: {
+  user: SignUpUser
+  setUser: React.Dispatch<React.SetStateAction<SignUpUser>>
+}) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     props.setUser({ ...props.user, email: e.target.value })
   }
   return (
