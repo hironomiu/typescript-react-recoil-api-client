@@ -1,5 +1,5 @@
 import { atom, selector } from 'recoil'
-import { Notification, NotificationData } from '../types'
+import { Notification } from '../types'
 
 export const notificationCountAtom = atom<number>({
   key: 'notificationCountAtom',
