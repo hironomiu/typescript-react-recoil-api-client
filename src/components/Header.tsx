@@ -25,9 +25,9 @@ const Header: FC = memo(() => {
             Header{isLogin ? ':' + user.nickname : null}
           </span>
         </div>
-        <div className="m-3 flex items-center">
-          {isLogin ? (
-            <>
+        {isLogin ? (
+          <>
+            <div className="m-3 flex items-center">
               <BellIcon
                 className="h-8 w-8 mr-3 hover:cursor-pointer"
                 onClick={() => navigate('/notification')}
@@ -44,9 +44,9 @@ const Header: FC = memo(() => {
                 }}
               />
               {modalOn ? <SignOutModal setModalOn={setModalOn} /> : null}
-            </>
-          ) : null}
-        </div>
+            </div>
+          </>
+        ) : null}
       </div>
     </header>
   )
