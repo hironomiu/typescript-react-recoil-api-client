@@ -7,8 +7,8 @@ import {
   csrfTokenSelector,
 } from '../recoil/global'
 import { useAuth } from '../hooks/useAuth'
-import InputEmail from './parts/InputEmail'
-import InputPassword from './parts/InputPassword'
+import InputSignInEmail from './parts/InputSignInEmail'
+import InputSignInPassword from './parts/InputSignInPassword'
 import ErrorMessageModal from './modal/ErrorMessageModal'
 import InputSignUpNickName from './parts/InputSignUpNickName'
 import InputSignUpEmail from './parts/InputSignUpEmail'
@@ -87,10 +87,11 @@ const Auth = () => {
             <ErrorMessageModal message="SignIn Error" setModalOn={setModalOn} />
           ) : null}
           <h1 className="text-2xl">SignIn</h1>
-          <InputEmail user={signInUser} setUser={setSignInUser} />
-          <InputPassword user={signInUser} setUser={setSignInUser} />
+          <InputSignInEmail user={signInUser} setUser={setSignInUser} />
+          <InputSignInPassword user={signInUser} setUser={setSignInUser} />
           <button
             onClick={signInhandleClick}
+            data-testid="button-signin"
             disabled={signInUser.email && signInUser.password ? false : true}
             className="bg-gray-400 px-3 py-1 my-1 rounded disabled:bg-gray-100 disabled:text-gray-200 w-64 mt-2"
           >

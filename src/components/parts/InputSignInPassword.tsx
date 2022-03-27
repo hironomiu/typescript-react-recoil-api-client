@@ -11,12 +11,15 @@ type PROPS = {
     password: string
   }>
 }
-const InputPassword = memo((props: PROPS) => {
+
+// TODO InputSingUpXXXと纏まれれればまとめる
+const InputSignInPassword = memo((props: PROPS) => {
   return (
     <div className="flex flex-col">
       <label htmlFor="">Password</label>
       <input
         type="password"
+        data-testid="input-signin-password"
         value={props.user.password}
         placeholder="password"
         onChange={(e) =>
@@ -28,4 +31,4 @@ const InputPassword = memo((props: PROPS) => {
   )
 })
 
-export default InputPassword
+export default InputSignInPassword

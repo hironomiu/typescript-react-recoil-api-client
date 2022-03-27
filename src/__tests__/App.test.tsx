@@ -72,4 +72,20 @@ describe('App', () => {
     userEvent.click(screen.getByTestId('span-q-signin'))
     expect(await screen.findAllByText('SignIn')).toBeTruthy()
   })
+  // TODO E2Eなのでちょっと考える
+  it('Signin', async () => {
+    render(
+      <React.StrictMode>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </React.StrictMode>
+    )
+    // expect(await screen.findByText('Loading...')).toBeInTheDocument()
+    expect(await screen.findAllByText('SignIn')).toBeTruthy()
+    userEvent.type(screen.getByTestId('input-signin-email'), 'taro@example.com')
+    userEvent.type(screen.getByTestId('input-signin-password'), 'password')
+    userEvent.click(screen.getByTestId('button-signin'))
+    expect(await screen.findByText('太郎')).toBeInTheDocument()
+  })
 })

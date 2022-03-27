@@ -12,7 +12,8 @@ type PROPS = {
   }>
 }
 
-const InputEmail = memo((props: PROPS) => {
+// TODO InputSingUpXXXと纏まれれればまとめる
+const InputSignInEmail = memo((props: PROPS) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     props.setUser({ ...props.user, email: e.target.value })
   }
@@ -23,6 +24,7 @@ const InputEmail = memo((props: PROPS) => {
         type="email"
         value={props.user.email}
         placeholder="email"
+        data-testid="input-signin-email"
         onChange={handleChange}
         className="bg-gray-100 rounded px-3 py-1 my-1 w-64 border-[1px] border-gray-300"
       />
@@ -30,4 +32,4 @@ const InputEmail = memo((props: PROPS) => {
   )
 })
 
-export default InputEmail
+export default InputSignInEmail
