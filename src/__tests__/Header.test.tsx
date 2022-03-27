@@ -24,7 +24,7 @@ describe('Header', () => {
 
     expect(await screen.findByText('Loading...')).toBeInTheDocument()
     expect(
-      await screen.findByText('Header', undefined, {
+      await screen.findByText('Super Web Site!!', undefined, {
         timeout: 1000,
       })
     ).toBeInTheDocument()
@@ -42,7 +42,7 @@ describe('Header', () => {
         </RecoilRoot>
       </BrowserRouter>
     )
-    expect(await screen.findByText('Header:')).toBeInTheDocument()
+    expect(await screen.findByText('Super Web Site!!:')).toBeInTheDocument()
     expect(screen.getByTestId('bell-icon')).toBeTruthy()
     expect(screen.getByTestId('logout-icon')).toBeTruthy()
   })

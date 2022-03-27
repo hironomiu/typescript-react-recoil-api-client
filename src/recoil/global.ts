@@ -2,6 +2,11 @@ import { atom, selector } from 'recoil'
 
 const API_URL = process.env.REACT_APP_API_URL
 
+export const serviceNameAtom = atom({
+  key: 'serviceNameAtom',
+  default: 'Super Web Site!!',
+})
+
 export const userAtom = atom({
   key: 'userAtom',
   default: { email: '', nickname: '' },
