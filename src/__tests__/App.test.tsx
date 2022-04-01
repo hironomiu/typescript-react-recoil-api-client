@@ -85,6 +85,7 @@ describe('App', () => {
     expect(await screen.findAllByText('SignIn')).toBeTruthy()
     userEvent.type(screen.getByTestId('input-signin-email'), 'taro@example.com')
     userEvent.type(screen.getByTestId('input-signin-password'), 'password')
+    // TODO ワーニングが出力される ->  [MSW] Warning: captured a request without a matching request handler:
     userEvent.click(screen.getByTestId('button-signin'))
     // 太郎は表示されず（上の通りE2Eなので考える）
     expect(await screen.findByText('Super Web Site!!')).toBeInTheDocument()
