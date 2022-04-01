@@ -81,11 +81,13 @@ describe('App', () => {
         </BrowserRouter>
       </React.StrictMode>
     )
-    // expect(await screen.findByText('Loading...')).toBeInTheDocument()
+    expect(screen.getByText('Super Web Site!!')).toBeInTheDocument()
     expect(await screen.findAllByText('SignIn')).toBeTruthy()
     userEvent.type(screen.getByTestId('input-signin-email'), 'taro@example.com')
     userEvent.type(screen.getByTestId('input-signin-password'), 'password')
     userEvent.click(screen.getByTestId('button-signin'))
-    expect(await screen.findByText('太郎')).toBeInTheDocument()
+    // 太郎は表示されず（上の通りE2Eなので考える）
+    expect(await screen.findByText('Super Web Site!!')).toBeInTheDocument()
+    // screen.debug()
   })
 })

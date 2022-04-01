@@ -5,6 +5,40 @@ import { Suspense } from 'react'
 import Header from '../components/Header'
 import { BrowserRouter } from 'react-router-dom'
 import { isLoginAtom } from '../recoil/global'
+import { notificationCountAtom } from '../recoil/notification'
+import { rest } from 'msw'
+import { setupServer } from 'msw/node'
+
+// TODO mswでspan-notification-countをコントロールしたい（今はrecoilに初期値を設定してテストしている（これはこれで問題ないが））
+// const handlers = [
+//   rest.get('http://localhost:5550/api/v1/notifications', (req, res, ctx) => {
+//     return res(
+//       ctx.status(200),
+//       ctx.json([
+//         {
+//           id: 1,
+//           title: 'dummy title',
+//           notification: 'dummy notification',
+//           is_confirmed: false,
+//         },
+//       ])
+//     )
+//   }),
+// ]
+
+// const server = setupServer(...handlers)
+
+// beforeEach(() => {
+//   server.listen()
+// })
+
+// afterEach(() => {
+//   server.resetHandlers()
+// })
+
+// afterAll(() => {
+//   server.close()
+// })
 
 const Fallback = () => {
   return <div>Loading...</div>
@@ -32,6 +66,7 @@ describe('Header', () => {
   it('モックによりSignIn済み、ベルアイコンとログアウトアイコンが存在すること', async () => {
     const initializeState = ({ set }: { set: SetRecoilState }) => {
       set(isLoginAtom, true)
+      set(notificationCountAtom, 3)
     }
     render(
       <BrowserRouter>
@@ -45,5 +80,7 @@ describe('Header', () => {
     expect(await screen.findByText('Super Web Site!!:')).toBeInTheDocument()
     expect(screen.getByTestId('bell-icon')).toBeTruthy()
     expect(screen.getByTestId('logout-icon')).toBeTruthy()
+    expect(screen.getByTestId('span-notification-count')).toBeTruthy()
+    expect(screen.getByTestId('span-notification-count')).toHaveTextContent('3')
   })
 })

@@ -36,7 +36,10 @@ const Header: FC = memo(() => {
                 data-testid="bell-icon"
               />
               {notificationCount === 0 ? null : (
-                <span className="absolute inline-block text-[5px] top-[10px] right-[55px] bg-red-500 text-white rounded-full text-center h-[12px] w-[12px] leading-[12px]">
+                <span
+                  data-testid="span-notification-count"
+                  className="absolute inline-block text-[5px] top-[10px] right-[55px] bg-red-500 text-white rounded-full text-center h-[12px] w-[12px] leading-[12px]"
+                >
                   {notificationCount}
                 </span>
               )}
